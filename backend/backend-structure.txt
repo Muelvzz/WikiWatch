@@ -1,0 +1,15 @@
+backend
+|--- app
+        |--- api (formerly routes)
+                |--- v1
+                        |--- articles.py
+        |--- core
+                |--- config.py
+        |--- schemas
+                |--- article_schema.py
+        |--- services  <-- ADD THIS: Put the actual math/Wikipedia logic here
+                |--- wiki_service.py 
+        |--- main.py
+|--- .env
+|--- requirements.txt
+|--- start.py

@@ -1,0 +1,12 @@
+frontend
+|--- src
+        |--- assets/
+        |--- components/
+        |--- config/
+        |--- features/
+                |--- dashboard/
+                |--- analysisboard/
+        |--- hooks/
+        |--- store/
+        |--- utils/
+        |--- App.js
