@@ -1,4 +1,5 @@
-from services.wiki_fetch import user_input
+from app.services.wiki_fetch import user_input
+from app.schemas import article_schema
 
 class AnalyzeData():
     def __init__(self, get_data):
@@ -53,14 +54,23 @@ class AnalyzeData():
         return data
     
 def analyzed_data(url_input):
-    data = user_input(url_input)
+    if isinstance(url_input, article_schema.UrlInput):
+        url = url_input.url_input
+    else:
+        url = url_input
+
+    data = user_input(url)
     analyze_data = AnalyzeData(data)
+    
+    prose_val = analyze_data.analyze_prose()
+    assessment_val = analyze_data.analyze_assessment()
+    revert_val = analyze_data.analyze_reverts()
 
     data_json = {
-        'prose': analyze_data.analyze_prose(),
+        'prose': {'prose': prose_val} if isinstance(prose_val, (int, float)) else prose_val,
         'article_info': analyze_data.analyze_article_info(),
-        'assessment': analyze_data.analyze_assessment(),
-        'revert': analyze_data.analyze_reverts()
+        'assessment': {'class_badge': assessment_val} if isinstance(assessment_val, str) else assessment_val,
+        'revert': {'revision_count': revert_val} if isinstance(revert_val, int) else revert_val,
     }
 
     return data_json

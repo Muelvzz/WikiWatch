@@ -52,8 +52,8 @@ class GetData:
                 "prop": "revisions",
                 "titles": self.article,
                 "rvprop": "timestamp|tags",
-                "rvlimit": "max",     # Get as many as possible (up to 500)
-                "rvend": self.revert_time     # Stop looking once we hit 48 hours ago
+                "rvlimit": "max",
+                "rvend": self.revert_time
             }
 
         revert_response = requests.get(revert_url, params=params, headers=self.headers)

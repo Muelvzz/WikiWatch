@@ -1,17 +1,26 @@
-from services.wiki_calculate import analyzed_data
+from fastapi import FastAPI
+from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
+from slowapi import Limiter
 
-if __name__ == '__main__':
-    user_input = analyzed_data("https://en.wikipedia.org/wiki/Magnus_Carlsen")
+from fastapi.middleware.cors import CORSMiddleware
 
-    print(user_input)
+from app.api.v1 import articles
 
-'''
-1. main.py sends an input into the wiki_fetch
-2. the wiki_fetch sends a request for an api
-3. the wiki_fetch will return the api
+app = FastAPI(
+    title='WikiWatch',
+    version='1.0'
+)
 
-4. the wiki_calculate will then start after the wiki_fetch
-5. the wiki_calculate will then perform all the functions
-6. the wiki_calculate will send it back to the main.py to display
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['http://localhost:5173'],
+    allow_credentials=True,
+    allow_methods=['*'],
+    allow_headers=['*'],
+)
 
-'''
+limiter = Limiter(key_func=get_remote_address)
+app.state.limiter = limiter
+
+app.include_router(articles.router)
