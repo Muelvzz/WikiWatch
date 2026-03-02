@@ -30,7 +30,7 @@ export default function NavBar() {
         {
           width >= 1024 && (
           <div className="bg-[#a3a7a7] flex-1 flex rounded-md gap-x-1 p-1">
-            <img src="public\search.png" alt="Search Icon" className="w-5"/>
+            <img src="\search.png" alt="Search Icon" className="w-5"/>
             <input 
               type="text" 
               className="w-full font-light text-sm"
