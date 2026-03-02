@@ -16,7 +16,7 @@ const HeroSection = () => {
 
           <section className="flex flex-col justify-center gap-y-5">
             <div className="bg-white flex-1 flex rounded-md gap-x-1 px-1 py-2">
-              <img src="public\search.png" alt="Search Icon" className="w-5"/>
+              <img src="\search.png" alt="Search Icon" className="w-5"/>
               <input 
                 type="text" 
                 className="w-full font-light text-sm text-black"

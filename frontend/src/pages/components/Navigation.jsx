@@ -17,7 +17,7 @@ export default function NavBar() {
         <div className="flex items-center gap-x-2 flex-1">
           <div>
             <img 
-              src="public\logo.png" alt="Logo" 
+              src="\logo.png" alt="Logo" 
               className="w-10"
             />
           </div>
