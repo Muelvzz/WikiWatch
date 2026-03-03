@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function NavBar() {
+export default function NavBar({ inputRef, handleKeyDown }) {
 
   const [width, setWidth] = useState(window.innerWidth)
 
@@ -35,6 +35,7 @@ export default function NavBar() {
               type="text" 
               className="w-full font-light text-sm"
               placeholder="Wikipedia Link"
+              ref={inputRef} onKeyDown={handleKeyDown}
             />
           </div>
           )

@@ -1,7 +1,7 @@
-const HeroSection = () => {
+const HeroSection = ({ inputRef, handleKeyDown }) => {
   return (
     <>
-      <main className="flex  justify-center items-center h-full px-4">
+      <main className="flex  justify-center items-center h-full px-4 fade-in-page">
         <article className="lg:w-3/4 flex flex-col lg:justify-center">
 
           <section
@@ -11,7 +11,9 @@ const HeroSection = () => {
           </section>
 
           <section className="text-center mt-10 mb-10">
-            <b>Wikipedia isn't a finished book - it's a constant argument</b>. While we all know that anyone can edit a page - making it a risky source for academic or professional research - not every article is <b>"fake"</b>. <b>Many are the result of years of rigorous, high-quality consensus</b>, while others are curretnly being torn apart by 'edit wars' and biased agendas.
+            <p>
+              <b className="animate-pulse">Wikipedia isn't a finished book - it's a constant argument</b>. While we all know that anyone can edit a page - making it a risky source for academic or professional research - not every article is <b>"fake"</b>. <b className="animate-pulse">Many are the result of years of rigorous, high-quality consensus</b>, while others are curretnly being torn apart by 'edit wars' and biased agendas.
+            </p>
           </section>
 
           <section className="flex flex-col justify-center gap-y-5">
@@ -21,6 +23,7 @@ const HeroSection = () => {
                 type="text" 
                 className="w-full font-light text-sm text-black"
                 placeholder="Wikipedia Link"
+                ref={inputRef} onKeyDown={handleKeyDown}
               />
             </div>
             <div className="flex justify-center">
