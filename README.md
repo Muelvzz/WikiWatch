@@ -3,7 +3,7 @@
 
 A Python Analysis tool that fetches data on a WikiPedia Article for better evaluation and insights of the page.
 
-Project Link: https://en.wikipedia.org/wiki/Lelouch_Lamperouge
+Project Link: https://wikiwatch.streamlit.app/
 ## Screenshots
 
 ![App Screenshot](image.png)
