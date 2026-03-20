@@ -125,10 +125,11 @@ class ParseWiki:
             raise ValueError(f"Missing required key in API response: {e}")
 
     def assessment(self, api, article_name):
+        new_name = article_name.replace('_', ' ')
         try:
-            if article_name not in api['pages']:
-                raise ValueError(f"Article '{article_name}' not found in API response")
-            page = api['pages'][article_name]
+            if new_name not in api['pages']:
+                raise ValueError(f"Article '{new_name}' not found in API response")
+            page = api['pages'][new_name]
             article_class = page['assessment']['class']
             article_category = page['assessment']['category']
             article_badge = page['assessment']['badge']

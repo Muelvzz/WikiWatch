@@ -91,24 +91,24 @@ class FetchWiki:
         except requests.RequestException:
             return self.error_message
 
-    def fetch_talk_page_activity(self, article_name, headers):
-        url = "https://en.wikipedia.org/w/api.php"
+    # def fetch_talk_page_activity(self, article_name, headers):
+    #     url = "https://en.wikipedia.org/w/api.php"
 
-        params = {
-            "action": "query",
-            "prop": "revision",
-            "titles": f'Talk:{article_name}',
-            "rvlimit": 10,
-            "rvprop": "timestamp|user|comment",
-            "format": "json"
-        }
+    #     params = {
+    #         "action": "query",
+    #         "prop": "revision",
+    #         "titles": f'Talk:{article_name}',
+    #         "rvlimit": 10,
+    #         "rvprop": "timestamp|user|comment",
+    #         "format": "json"
+    #     }
 
-        try:
-            response = requests.get(url, headers=headers, params=params)
-            return response.json()
+    #     try:
+    #         response = requests.get(url, headers=headers, params=params)
+    #         return response.json()
         
-        except requests.RequestException:
-            return self.error_message
+    #     except requests.RequestException:
+    #         return self.error_message
     
     def fetch_registered_and_anonymous_and_minor_edits(self, project_name, article_name):
         url = f'https://xtools.wmcloud.org/api/page/articleinfo/{project_name}/{article_name}'
