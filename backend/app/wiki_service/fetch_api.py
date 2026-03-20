@@ -1,7 +1,6 @@
 import requests
 from urllib.parse import urlparse
 from datetime import datetime, timedelta
-from dotenv import load_dotenv
 
 class FetchWiki:
 
