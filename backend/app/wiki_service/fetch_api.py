@@ -1,4 +1,4 @@
-import os, requests
+import requests
 from urllib.parse import urlparse
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
@@ -7,11 +7,15 @@ class FetchWiki:
 
     error_message = {'error': 'Could not fetch necessary data'}
 
-    def __init__(self, article_link):
+    def __init__(self, article_link, email):
         self.__article_link = article_link
+        self.__email = email
 
     def get_article_name(self):
         return self.__article_link
+    
+    def get_email(self):
+        return self.__email
     
     def parse_article(self, article_link=None):
         if article_link is None:
@@ -21,7 +25,7 @@ class FetchWiki:
             parsed_url = urlparse(article_link)
             project = parsed_url.netloc
             article = parsed_url.path.split('/')[-1]
-            headers = {'User-Agent': f'MyAnalysisTool/1.0({os.getenv("EMAIL")})'}
+            headers = {'User-Agent': f'MyAnalysisTool/1.0({self.get_email})'}
         
         except Exception:
             return {'error': 'Could not parse the link.'}

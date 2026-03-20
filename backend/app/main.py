@@ -50,14 +50,48 @@ def main():
 
     st.divider()
 
-    input = st.text_input('Enter the wikipedia link', value='', width='stretch')
-    input_button = st.button('Submit')
+    option = st.selectbox(
+        "Would you like to proceed?",
+        ("Absolutely!", "Nahh")
+    )
 
-    if input_button:
-        st.divider()
+    if option == "Absolutely!":
+        email = st.text_input("Enter your email (this is necessary):")
+        
+        if st.button("Submit", key='email_btn'):
+            if "@" in email:
+                st.success(f"Thanks! We will be using the email to fetch data")
+                st.success("Rest assured, your email is completely confidential")
+            else:
+                st.error("Please enter a valid email.")
 
-        api = fetch_and_parse(input)
-        present_data(api)
+        input = st.text_input('Enter the wikipedia link', value='', width='stretch')
+        input_button = st.button('Submit', key='url_link_btn')
+
+        if input_button:
+            st.divider()
+
+            if not email or '@' not in email:
+                st.error('Please enter a valid email before submitting a URL.')
+            elif not input or not input.strip():
+                st.error('Please enter a valid Wikipedia URL.')
+            else:
+                try:
+                    api = fetch_and_parse(input, email)
+                except Exception as exc:
+                    st.error('Failed to fetch and parse data from the Wikipedia link.')
+                    st.exception(exc)
+                    return
+
+                if not isinstance(api, dict):
+                    st.error('Unexpected response from data loader. Please try again.')
+                    return
+
+                try:
+                    present_data(api)
+                except Exception as exc:
+                    st.error('Failed to render data. There may be missing fields in the response.')
+                    st.exception(exc)
 
 
 if __name__ == "__main__":
