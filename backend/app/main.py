@@ -58,7 +58,7 @@ def main():
     if option == "Absolutely!":
         email = st.text_input("Enter your email (this is necessary):")
         
-        if st.button("Submit", key='email_btn'):
+        if st.button("Enter", key='email_btn'):
             if "@" in email:
                 st.success(f"Thanks! We will be using the email to fetch data")
                 st.success("Rest assured, your email is completely confidential")

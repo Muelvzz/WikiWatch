@@ -1,16 +1,36 @@
 import streamlit as st
+import math
+import plotly.express as px
+import pandas as pd
 
 def present_reg_anon(api):
+    registered_edits = api.get('editors', 'N/A')
+    anonymous_edits = api.get('anon_edits', 'N/A')
+    minor_edits = api.get('minor_edits', 'N/A')
+
     try:
-        col1, col2 = st.columns(2)
+        gcd = math.gcd(anonymous_edits, registered_edits)
 
-        with col1:
-            st.write(f"Registered Edits: {api.get('editors', 'N/A')}")
-            st.write(f"Anonymous Edits: {api.get('anon_edits', 'N/A')}")
+        simiplified_r = registered_edits // gcd
+        simplified_a = anonymous_edits // gcd
 
-        with col2:
-            st.write(f"Minor Edits: {api.get('minor_edits', 'N/A')}")
-            st.write(f"Last Edited: {api.get('modified_at', 'N/A')}")
+        st.subheader(f'Registered to Anonymous edits ratio: {simiplified_r} : {simplified_a}')
+
+    except ValueError:
+        st.subheader('Registered to Anonymous edit ratio: N/A')
+
+    try:
+        data = {
+            'Category': ['Registered edits', 'Anonymous edits', 'Minor Edits'],
+            'Value': [registered_edits, anonymous_edits, minor_edits]
+        }
+        df = pd.DataFrame(data)
+
+        fig = px.pie(df, values='Value', names='Category', title='Total Edits')
+
+        st.plotly_chart(fig)
     except Exception as exc:
         st.error('Unable to show registered/anonymous/minor edits data.')
         st.exception(exc)
+    
+    st.write(f"Last Edited: {api.get('modified_at', 'N/A')}")
